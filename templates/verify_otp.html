@@ -1,0 +1,24 @@
+{% extends "_layout.html" %}
+{% block content %}
+<div class="form-container">
+    <div class="card">
+        <h2 style="text-align: center;">Verify Your Number</h2>
+        <p style="text-align: center; opacity: 0.7; margin-bottom: 2rem;">
+            Enter the 6-digit code we sent to your WhatsApp.
+        </p>
+        
+        <form method="POST" action="{{ url_for('verify_otp') }}">
+            <div class="form-group">
+                <label for="otp">Verification Code</label>
+                <input type="text" id="otp" name="otp" inputmode="numeric" pattern="\d{6}" maxlength="6" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Verify and Register</button>
+        </form>
+
+        <p style="text-align: center; margin-top: 1.5rem;">
+            Didn't get a code? <a href="{{ url_for('register') }}">Go back and re-enter your details</a>.
+        </p>
+    </div>
+</div>
+{% endblock %}

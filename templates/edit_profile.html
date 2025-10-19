@@ -1,0 +1,49 @@
+{% extends "_layout.html" %}
+{% block content %}
+<div class="form-container">
+    <div class="card">
+        <h2 style="text-align: center;">Edit Your Profile</h2>
+        
+        <form method="POST" action="{{ url_for('edit_profile') }}" enctype="multipart/form-data">
+            
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" value="{{ current_user.name }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" value="{{ current_user.email }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="exam_year">Target Exam Year</label>
+                <input type="number" id="exam_year" name="exam_year" value="{{ current_user.exam_year }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="school">School</label>
+                <input type="text" id="school" name="school" value="{{ current_user.school }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp_number">WhatsApp Number</label>
+                <input type="tel" id="whatsapp_number" name="whatsapp_number" value="{{ current_user.whatsapp_number }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="guardian_contact">Guardian's Contact Number</label>
+                <input type="tel" id="guardian_contact" name="guardian_contact" value="{{ current_user.guardian_contact }}">
+            </div>
+
+            <div class="form-group">
+                <label for="profile_picture">Update Profile Picture</label>
+                <input type="file" id="profile_picture" name="profile_picture" class="form-control-file">
+                <small class="form-text text-muted">Leave blank to keep your current picture.</small>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Save Changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

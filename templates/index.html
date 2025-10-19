@@ -1,0 +1,25 @@
+{% extends "_layout.html" %}
+{% block content %}
+    <div class="hero">
+        <h1>ApiWada Physics | Niroshan Jayathunge </h1>
+        <p style="font-size: 1.2rem; opacity: 0.8;">{{ quote }}</p>
+    </div>
+
+    <h2 style="text-align: center; margin-bottom: 2rem;">Our Packages</h2>
+    <div class="packages-grid">
+        {% for course in courses %}
+        <div class="card package-card">
+            <h3>{{ course.name }}</h3>
+            <p class="price">LKR {{ "%.2f"|format(course.price) }}</p>
+            <p>{{ course.description or 'Remember The Goal and Never GiveUp' }}</p>
+            <button class="btn btn-primary" style="margin-top: 1rem;">Enroll Now</button>
+        </div>
+        {% endfor %}
+        <div class="card package-card">
+            <h3>Advanced Physics</h3>
+            <p class="price">LKR 3000.00</p>
+            <p>Master complex topics with our advanced class.</p>
+            <button class="btn btn-primary" style="margin-top: 1rem;">Enroll Now</button>
+        </div>
+    </div>
+{% endblock %}

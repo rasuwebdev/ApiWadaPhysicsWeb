@@ -1,0 +1,89 @@
+{% extends "_layout.html" %}
+{% block content %}
+
+<div class="dashboard-header">
+    <div class="profile-area">
+        {% if current_user.profile_picture and current_user.profile_picture != 'default.jpg' %}
+            <img src="{{ url_for('static', filename='images/profile_pics/' + current_user.profile_picture) }}" 
+                 alt="Profile Picture" class="profile-pic">
+        {% else %}
+            <div class="profile-pic-initial">{{ current_user.name[0].upper() }}</div>
+        {% endif %}
+        <div class="profile-text">
+            <h2>Welcome back, {{ current_user.name.split()[0] }}!</h2>
+            <p>Index: {{ current_user.index_number }}</p>
+        </div>
+    </div>
+    {% if wish %}
+        <div class="birthday-wish">{{ wish }}</div>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3>My Progress</h3>
+    {% if marks %}
+        <div class="latest-mark">
+            <strong>Latest Score:</strong> {{ marks[0].paper_name }} - <strong>{{ marks[0].score }}%</strong>
+        </div>
+        <div class="chart-container" style="height:300px;">
+            <canvas id="progressChart"></canvas>
+        </div>
+    {% else %}
+        <p>Your progress chart will appear here once your marks are added.</p>
+    {% endif %}
+</div>
+
+<div class="dashboard-grid">
+    <div class="card">
+        <h3>My Courses</h3>
+        <p>Your enrolled courses will be listed here.</p>
+    </div>
+    <div class="card">
+        <h3>Edit Profile</h3>
+        <p>A form to edit your details can be placed here.</p>
+        <a href="{{ url_for('edit_profile') }}" class="btn btn-primary" style="margin-top: 1rem;">Edit My Profile</a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{% if marks %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const canvas = document.getElementById('progressChart');
+    if (!canvas) return;
+
+    // ✅ Safely load data from Flask (prevents "Declaration or statement expected" errors)
+    const chartLabels = JSON.parse('{{ chart_labels | tojson | safe }}');
+    const chartData = JSON.parse('{{ chart_data | tojson | safe }}');
+
+    const ctx = canvas.getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: 'Marks %',
+                data: chartData,
+                borderColor: 'rgb(0, 123, 255)',
+                backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+});
+</script>
+{% endif %}
+
+{% endblock %}
