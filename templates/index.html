@@ -1,10 +1,11 @@
 {% extends "_layout.html" %}
 {% block content %}
-    <div class="hero">
-        <h1>ApiWada Physics | Niroshan Jayathunge </h1>
-        <p style="font-size: 1.2rem; opacity: 0.8;">{{ quote }}</p>
-    </div>
+<div class="hero">
+    <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Niroshan Jayathunge" class="hero-profile-pic">
 
+    <h1>ApiWada Physics | Niroshan Jayathunge &reg; </h1>
+    <p style="font-size: 1.2rem; opacity: 0.8;">{{ quote }}</p>
+</div>
     <h2 style="text-align: center; margin-bottom: 2rem;">Our Packages</h2>
     <div class="packages-grid">
         {% for course in courses %}
@@ -16,10 +17,27 @@
         </div>
         {% endfor %}
         <div class="card package-card">
-            <h3>Advanced Physics</h3>
-            <p class="price">LKR 3000.00</p>
-            <p>Master complex topics with our advanced class.</p>
+            <h3>Advanced Physics/Don't Enroll</h3>
+            <p class="price">LKR 100.00</p>
+            <p>This is for admin users only</p>
             <button class="btn btn-primary" style="margin-top: 1rem;">Enroll Now</button>
         </div>
+
+        </div>
+
+<h2 style="text-align: center; margin-top: 4rem; margin-bottom: 2rem;">Sample Videos</h2>
+<div class="video-grid">
+    {% for video in videos %}
+    <div class="card video-card">
+        <div class="video-responsive">
+            <iframe src="{{ get_embed_url(video.youtube_link) }}" title="{{ video.title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h4 style="margin-top: 1rem;">{{ video.title }}</h4>
+    </div>
+    {% else %}
+    <p style="text-align: center;">Sample videos will be available soon!</p>
+    {% endfor %}
+</div>
+
     </div>
 {% endblock %}
