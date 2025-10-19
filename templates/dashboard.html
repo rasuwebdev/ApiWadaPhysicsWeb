@@ -34,10 +34,22 @@
 </div>
 
 <div class="dashboard-grid">
-    <div class="card">
-        <h3>My Courses</h3>
-        <p>Your enrolled courses will be listed here.</p>
-    </div>
+<div class="card">
+    <h3>My Courses</h3>
+    
+    {% if enrollments %}
+        <ul class="course-list">
+            {% for enrollment in enrollments %}
+                <li>
+                    <i class="fas fa-book-open"></i> <span>{{ enrollment.course.name }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You are not yet enrolled in any courses.</p>
+    {% endif %}
+
+</div>
     <div class="card">
         <h3>Edit Profile</h3>
         <p>A form to edit your details can be placed here.</p>
