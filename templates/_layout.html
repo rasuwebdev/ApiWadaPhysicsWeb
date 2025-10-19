@@ -3,16 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portal</title>
+    <title>Api Wada Physics</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body class="light-theme">
     
     <nav class="navbar">
-        <a href="{{ url_for('home') }}" class="navbar-brand">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ApiWada Physics" class="navbar-logo">
-        <span>ApiWada Physics</span>
-        </a>
+        <div class="navbar-brand-container">
+
+<a href="{{ url_for('home') }}" class="navbar-brand">
+    
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/logo-light.png') }}" alt="logo" class="navbar-logo logo-light-theme">
+        <img src="{{ url_for('static', filename='images/logo-dark.png') }}" alt="logoo" class="navbar-logo logo-dark-theme">
+    </div>
+    
+    <span>ApiWada Physics &reg;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;| </span>
+</a>
+
+    <div class="navbar-socials">
+        <a href="https://www.facebook.com/share/16urZo8NHz/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://youtube.com/@niroshanjayathunge?si=XfvMYr95he5KKUD0" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+</div>
         <div class="navbar-links">
             {% if current_user.is_authenticated %}
                 <a href="{{ url_for('dashboard') }}">Dashboard</a>
@@ -41,5 +55,9 @@
     </main>
     
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <footer class="site-footer">
+    <p>This site is developed by <a href="https://www.rasuweb.dev" target="_blank">RasuWebDev</a></p>
+</footer>
 </body>
 </html>
